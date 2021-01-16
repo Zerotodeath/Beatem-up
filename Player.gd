@@ -13,12 +13,14 @@ var state = Moving
 var Motion = Vector2.ZERO
 var Direction = 1
 
+signal Attacked
+
 func _process(delta):
 	match state:
 		Moving:
 			Moving(delta)
 		Attacking:
-			Attacking()
+			Attack()
 
 func Moving(delta):
 	var Xinput = Input.get_action_strength("Input_right") - Input.get_action_strength("Input_left")
@@ -35,7 +37,16 @@ func Moving(delta):
 	else:
 		Motion.y = 0
 	
+	$Attack.visible = false
+	$Hitbox/CollisionShape2D.disabled = true
+	
+	if Input.is_action_just_pressed("Input_attack"):
+		Attack()
+	
 	move_and_slide(Motion)
 
-func Attacking():
-	pass
+func Attack():
+	emit_signal("Attacked")
+	$Attack.visible = true
+	$Hitbox/CollisionShape2D.disabled = false
+
