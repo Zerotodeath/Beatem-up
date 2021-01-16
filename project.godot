@@ -16,7 +16,15 @@ _global_script_class_icons={
 [application]
 
 config/name="Beatem-up"
+run/main_scene="res://Practicescene.tscn"
 config/icon="res://icon.png"
+
+[display]
+
+window/size/width=740
+window/size/height=385
+window/stretch/mode="viewport"
+window/stretch/aspect="keep"
 
 [rendering]
 
