@@ -37,16 +37,16 @@ func Moving(delta):
 	else:
 		Motion.y = 0
 	
-	$Attack.visible = false
+	$AnimationPlayer.play("Idle")
 	$Hitbox/CollisionShape2D.disabled = true
 	
 	if Input.is_action_just_pressed("Input_attack"):
 		Attack()
+		$AnimationPlayer.play("New Anim")
 	
 	move_and_slide(Motion)
 
 func Attack():
 	emit_signal("Attacked")
-	$Attack.visible = true
-	$Hitbox/CollisionShape2D.disabled = false
+
 
