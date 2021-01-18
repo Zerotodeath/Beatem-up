@@ -21,7 +21,6 @@ var Direction = 1
 signal Attacked
 
 func _process(delta):
-	print(Xinput)
 	
 	match state:
 		Moving:
@@ -67,7 +66,6 @@ func Idling(delta):
 	move_and_slide(Motion)
 
 func Attack(delta):
-	emit_signal("Attacked")
 	$AnimationPlayer.play("Attack")
 	Motion.x = 0
 	Motion.y = 0
@@ -76,3 +74,8 @@ func Attack(delta):
 		state = Moving
 	
 	move_and_slide(Motion)
+
+
+func _on_AnimationPlayer_animation_finished(Attack):
+	if state == Attacking:
+		state = Idle

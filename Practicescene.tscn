@@ -10,10 +10,14 @@
 
 [node name="KinematicBody2D" parent="." instance=ExtResource( 1 )]
 position = Vector2( 368, 160 )
+collision_layer = 3
+collision_mask = 2147483649
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2( 432, 184 )
 scale = Vector2( 2, 2 )
+collision_layer = 2147483652
+collision_mask = 4
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
