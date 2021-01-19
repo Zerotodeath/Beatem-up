@@ -53,7 +53,7 @@ func Move(delta):
 		sprite.flip_h = false
 	elif Xinput == -1:
 		hitbox.position.x = -36
-		$CollisionShape2D.position.x = 36
+		$CollisionShape2D.position.x = 38
 		sprite.flip_h = true
 	
 	if Xinput == 0:
@@ -69,8 +69,8 @@ func Idling(_delta):
 	$AnimationPlayer.play("Idle")
 	hitbox.disabled = true
 	
-	Motion.x = lerp(Motion.x, 0, 0.22)
-	Motion.y = lerp(Motion.y, 0, .27)
+	Motion.x = lerp(Motion.x, 0, 0.42)
+	Motion.y = lerp(Motion.y, 0, .47)
 	
 	if Input.is_action_pressed("Input_right") || Input.is_action_just_pressed("Input_left") || Input.is_action_just_pressed("Input_up") || Input.is_action_just_pressed("Input_down"):
 		state = Moving
