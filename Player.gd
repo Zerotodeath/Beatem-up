@@ -24,7 +24,6 @@ var Xinput
 var Yinput
 
 func _process(delta):
-	print(Health)
 	match state:
 		Moving:
 			Move(delta)
@@ -46,6 +45,7 @@ func Move(delta):
 	if Yinput != 0:
 		Motion.y += 550 * Yinput * delta
 		Motion.y = clamp(Motion.y, -300, 300)
+		$AnimationPlayer.play("Run")
 	
 	if Xinput == 1:
 		hitbox.position.x = 32
