@@ -115,7 +115,7 @@ animations = [ {
 extents = Vector2( 32, 56 )
 
 [sub_resource type="RectangleShape2D" id=27]
-extents = Vector2( 36, 48 )
+extents = Vector2( 60, 48 )
 
 [sub_resource type="Animation" id=28]
 resource_name = "Attack"
@@ -206,10 +206,11 @@ position = Vector2( -40, 44 )
 shape = SubResource( 26 )
 
 [node name="Hitbox" parent="." instance=ExtResource( 3 )]
+collision_layer = 3
 collision_mask = 4
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
-position = Vector2( 32, 48 )
+position = Vector2( 12, 48 )
 shape = SubResource( 27 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

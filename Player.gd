@@ -80,8 +80,8 @@ func Idling(_delta):
 
 func Attack(_delta):
 	$AnimationPlayer.play("Attack")
-	Motion.x = lerp(Motion.x, 0, .09)
-	Motion.y = lerp(Motion.y, 0, .09)
+	Motion.x = lerp(Motion.x, 0, .12)
+	Motion.y = lerp(Motion.y, 0, .12)
 	
 	
 	move_and_slide(Motion)
