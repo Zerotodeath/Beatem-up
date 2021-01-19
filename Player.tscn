@@ -210,7 +210,7 @@ frame = 6
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -40, 40 )
+position = Vector2( -40, 44 )
 shape = SubResource( 26 )
 
 [node name="Hitbox" parent="." instance=ExtResource( 3 )]

@@ -18,6 +18,7 @@ var Direction = 1
 var Health = 1
 
 onready var hitbox = $Hitbox/CollisionShape2D
+onready var sprite = $AnimatedSprite
 
 var Xinput
 var Yinput
@@ -48,8 +49,12 @@ func Move(delta):
 	
 	if Xinput == 1:
 		hitbox.position.x = 32
+		$CollisionShape2D.position.x = -40
+		sprite.flip_h = false
 	elif Xinput == -1:
-		hitbox.position.x = -112
+		hitbox.position.x = -36
+		$CollisionShape2D.position.x = 36
+		sprite.flip_h = true
 	
 	if Xinput == 0:
 		if Yinput == 0:
