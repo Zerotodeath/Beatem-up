@@ -3,7 +3,8 @@ extends KinematicBody2D
 enum{
 	Moving,
 	Attacking,
-	Idle
+	Idle,
+	Dead
 }
 
 
@@ -14,13 +15,15 @@ var state = Moving
 
 var Motion = Vector2.ZERO
 var Direction = 1
+var Health = 1
+
+onready var hitbox = $Hitbox/CollisionShape2D
 
 var Xinput
 var Yinput
 
-signal Attacked
-
 func _process(delta):
+	print(Health)
 	match state:
 		Moving:
 			Move(delta)
@@ -28,6 +31,8 @@ func _process(delta):
 			Attack(delta)
 		Idle:
 			Idling(delta)
+		Dead:
+			pass
 
 func Move(delta):
 	Xinput = Input.get_action_strength("Input_right") - Input.get_action_strength("Input_left")
@@ -41,17 +46,23 @@ func Move(delta):
 		Motion.y += 550 * Yinput * delta
 		Motion.y = clamp(Motion.y, -300, 300)
 	
+	if Xinput == 1:
+		hitbox.position.x = 32
+	elif Xinput == -1:
+		hitbox.position.x = -112
+	
 	if Xinput == 0:
 		if Yinput == 0:
 			state = Idle
 	
 	if Input.is_action_just_pressed("Input_attack"):
 		state = Attacking
+	
 	move_and_slide(Motion)
 
-func Idling(delta):
+func Idling(_delta):
 	$AnimationPlayer.play("Idle")
-	$Hitbox/CollisionShape2D.disabled = true
+	hitbox.disabled = true
 	
 	Motion.x = lerp(Motion.x, 0, 0.22)
 	Motion.y = lerp(Motion.y, 0, .27)
@@ -62,14 +73,11 @@ func Idling(delta):
 		state = Attacking
 	move_and_slide(Motion)
 
-func Attack(delta):
+func Attack(_delta):
 	$AnimationPlayer.play("Attack")
 	Motion.x = lerp(Motion.x, 0, .1)
-	Motion.y = lerp(Motion.y, 0, .12)
+	Motion.y = lerp(Motion.y, 0, .25)
 	
-	if Xinput != 0:
-		if Yinput != 0:
-			state = Moving
 	
 	move_and_slide(Motion)
 
@@ -77,3 +85,6 @@ func Attack(delta):
 func _on_AnimationPlayer_animation_finished(Attack):
 	if state == Attacking:
 		state = Moving
+
+func _on_Area2D_body_entered(body):
+	Health -= 1
