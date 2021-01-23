@@ -80,9 +80,8 @@ func Idling(_delta):
 
 func Attack(_delta):
 	$AnimationPlayer.play("Attack")
-	Motion.x = lerp(Motion.x, 0, .12)
-	Motion.y = lerp(Motion.y, 0, .12)
-	
+	Motion.x = lerp(Motion.x, 0, .02)
+	Motion.y = lerp(Motion.y, 0, .02)
 	
 	move_and_slide(Motion)
 
@@ -90,6 +89,7 @@ func Attack(_delta):
 func _on_AnimationPlayer_animation_finished(Attack):
 	if state == Attacking:
 		state = Moving
-
+	Motion.x = lerp(Motion.x, 0, 0.42)
+	Motion.y = lerp(Motion.y, 0, .47)
 func _on_Area2D_body_entered(body):
 	Health -= 1
